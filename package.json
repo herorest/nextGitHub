@@ -4,9 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "cross-env DEBUG=server:*,-not_this NODE_ENV=development node server.js",
+    "dev":"node server.js",
     "build": "next build",
-    "start":"cross-env NODE_ENV=production node server.js",
+    "start":"next start",
+    "next":"next",
+
+    "dev2": "cross-env DEBUG=server:*,-not_this NODE_ENV=development node server.js",
+    "start2":"cross-env NODE_ENV=production node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
