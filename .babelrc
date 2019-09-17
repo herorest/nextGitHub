@@ -7,6 +7,10 @@
                 "libraryName": "antd",
                 "style": "css"  // 可能 minicss 会有bug
             }
+        ],[
+            "styled-components", {
+                "ssr": true
+            }
         ]
     ]
 }

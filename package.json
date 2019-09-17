@@ -4,22 +4,23 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev":"node server.js",
+    "dev": "node server.js",
     "build": "next build",
-    "start":"next start",
-    "next":"next",
-
+    "start": "next start",
+    "next": "next",
     "dev2": "cross-env DEBUG=server:*,-not_this NODE_ENV=development node server.js",
-    "start2":"cross-env NODE_ENV=production node server.js",
+    "start2": "cross-env NODE_ENV=production node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@zeit/next-css": "^1.0.1",
     "antd": "^3.23.2",
     "atob": "^2.1.2",
     "axios": "^0.18.0",
     "babel-plugin-import": "^1.11.0",
+    "babel-plugin-styled-components": "^1.10.6",
     "cross-env": "^5.2.0",
     "debug": "^4.1.1",
     "http-proxy": "^1.17.0",
@@ -36,7 +37,7 @@
     "react-redux": "^6.0.1",
     "redux": "^4.0.1",
     "redux-devtools-extension": "^2.13.8",
-    "@zeit/next-css": "^1.0.1",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "styled-components": "^4.3.2"
   }
 }

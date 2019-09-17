@@ -21,10 +21,10 @@ for (const key in routeEvent) {
 
 class MyApp extends App {
 
-    static getInitialProps = async ({Component}) => {
+    static getInitialProps = async ({Component, ctx}) => {
         let pageProps
         if(Component.getInitialProps){
-            pageProps = await Component.getInitialProps();
+            pageProps = await Component.getInitialProps(ctx);
         }
         return {
             pageProps
