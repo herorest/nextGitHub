@@ -1,4 +1,4 @@
 import {Button} from 'antd';
-import './index.css'
+import Link from 'next/link';
 
-export default () => <div><Button>提交</Button></div>
+export default () => <Link href="/author?id=1" as='/author/1'><Button>提交</Button></Link>
