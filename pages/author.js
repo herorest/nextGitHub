@@ -1,8 +1,11 @@
-import Rc from '../components/rc';
 import {withRouter} from 'next/router';
 import Link from 'next/link';
 import {Button} from 'antd';
 import styled from 'styled-components';
+import dynamic from 'next/dynamic';
+
+//next按需引入组件
+const Rc = dynamic(import('../components/rc'));
 
 const Title = styled.h1`color: yellow; font-size: 40px`;
 
