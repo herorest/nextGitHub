@@ -1,8 +1,10 @@
 import App, {Container} from 'next/app';
-// import 'antd/dist/antd.css';
+import {Provider} from 'react-redux'
 import routeEvent from '../lib/routeEvent';
 import {Router} from 'next/router';
+import store from '../store/store';
 
+// import 'antd/dist/antd.css';
 import './index.css'
 
 function makeEvent(type){
@@ -36,9 +38,11 @@ class MyApp extends App {
 
         return (
             <Container>
-                <div className="Header">header</div>
-                <Component {...pageProps}></Component>
-                <div className="Footer">footer</div>
+                <Provider store={store}>
+                    <div className="Header">header</div>
+                    <Component {...pageProps}></Component>
+                    <div className="Footer">footer</div>
+                </Provider>
             </Container>
         )
     }
