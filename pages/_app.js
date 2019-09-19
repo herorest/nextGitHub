@@ -3,6 +3,7 @@ import {Provider} from 'react-redux'
 import routeEvent from '../lib/routeEvent';
 import {Router} from 'next/router';
 import store from '../store/store';
+import showInfoHoc from '../lib/hoc';
 
 // import 'antd/dist/antd.css';
 import './index.css'
@@ -24,13 +25,13 @@ for (const key in routeEvent) {
 class MyApp extends App {
 
     static getInitialProps = async ({Component, ctx}) => {
-        let pageProps
+        let pageProps;
         if(Component.getInitialProps){
             pageProps = await Component.getInitialProps(ctx);
         }
         return {
             pageProps
-        } 
+        };
     }
 
     render(){
@@ -48,4 +49,4 @@ class MyApp extends App {
     }
 }
 
-export default MyApp;
+export default showInfoHoc(MyApp);
