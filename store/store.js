@@ -21,10 +21,18 @@ function counterReducer(state = initialState, action){
     }
 }
 
-const store = createStore(combineReducers({
+const AllReducer = combineReducers({
     counter: counterReducer
-}), {
-    counter: initialState
-}, composeWithDevTools(applyMiddleware(ReduxThunk)));
+});
 
-export default store;
+const AllState = {
+    counter: initialState
+}
+
+export default function initialStore(state){
+    return createStore(
+        AllReducer, 
+        Object.assign({}, AllState, state), 
+        composeWithDevTools(applyMiddleware(ReduxThunk))
+    );
+};

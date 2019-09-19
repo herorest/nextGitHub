@@ -2,25 +2,8 @@ import {useState, useEffect, useReducer, useRef, useMemo, memo, useCallback} fro
 import {Button, Input} from 'antd';
 import Link from 'next/link';
 import {connect} from 'react-redux';
-// import getConfig from 'next/config';
-// const {serverRuntimeConfig, publicRuntimeConfig} = getConfig();
 
 function MyCountFunc(props){
-    // console.log(serverRuntimeConfig, publicRuntimeConfig);
-    // const [count, setCount] = useState(0)
-    // const [count, dispatchCount] = useReducer(countReducer, 0)
-    // dispatchCount({type: 'increase'})
-    // function countReducer(state, action){
-    //     switch(action.type){
-    //         case 'increase':
-    //             return state + 1;
-    //         case 'decrease':
-    //             return state - 1;
-    //         default:
-    //             return state;
-    //     }
-    // }
-
     const spanRef = useRef();
     const [name, setName] = useState('hello');
     const config = useMemo(() => (
@@ -62,7 +45,9 @@ const ChildEle = memo(function ({config, decrease}){
 });
 
 
-MyCountFunc.getInitialProps = () => {
+MyCountFunc.getInitialProps = (ctx) => {
+    const store = ctx.store;
+    // store.dispatch({type: 'INCREASE'});
     return {
         name: process.env.entry
     }

@@ -2,7 +2,6 @@ import App, {Container} from 'next/app';
 import {Provider} from 'react-redux'
 import routeEvent from '../lib/routeEvent';
 import {Router} from 'next/router';
-import store from '../store/store';
 import showInfoHoc from '../lib/hoc';
 
 // import 'antd/dist/antd.css';
@@ -24,7 +23,8 @@ for (const key in routeEvent) {
 
 class MyApp extends App {
 
-    static getInitialProps = async ({Component, ctx}) => {
+    static getInitialProps = async (ctx) => {
+        const Component = ctx.Component;
         let pageProps;
         if(Component.getInitialProps){
             pageProps = await Component.getInitialProps(ctx);
@@ -35,7 +35,7 @@ class MyApp extends App {
     }
 
     render(){
-        const {Component, pageProps} = this.props;
+        const {Component, pageProps, store} = this.props;
 
         return (
             <Container>
