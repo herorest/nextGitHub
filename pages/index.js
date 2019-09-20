@@ -1,5 +1,4 @@
 import {useState, useEffect, useReducer, useRef, useMemo, memo, useCallback} from 'react'
-import {Button, Input} from 'antd';
 import Link from 'next/link';
 import {connect} from 'react-redux';
 
@@ -30,18 +29,17 @@ function MyCountFunc(props){
     return (
         <>
             <p><span ref={spanRef}>{props.count}</span></p>
-            <Input type="text" value={name} onChange={e => setName(e.target.value)}></Input>
             <ChildEle config={config} decrease={onClickDecrease}></ChildEle>
-            <Link href="/author?id=1" as='/author/1'><Button>{props.name}</Button></Link>
+            <Link href="/author?id=1" as='/author/1'><button>{props.name}</button></Link>
         </>
     );
 }
 
 
 const ChildEle = memo(function ({config, decrease}){
-    return <Button onClick={decrease}>
+    return <button onClick={decrease}>
         <span style={{color: config.color}}>{config.text}</span>
-    </Button>
+    </button>
 });
 
 
