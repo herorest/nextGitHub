@@ -1,10 +1,12 @@
-import {useState, useEffect, useReducer, useRef, useMemo, memo, useCallback} from 'react'
+import {useEffect, useRef, useMemo, memo, useCallback} from 'react'
 import Link from 'next/link';
 import {connect} from 'react-redux';
+import getConfig from 'next/config';
+
+const {publicRuntimeConfig} = getConfig();
 
 function MyCountFunc(props){
     const spanRef = useRef();
-    const [name, setName] = useState('hello');
     const config = useMemo(() => (
         {
             text: `count is ${props.count}`,
@@ -31,6 +33,7 @@ function MyCountFunc(props){
             <p><span ref={spanRef}>{props.count}</span></p>
             <ChildEle config={config} decrease={onClickDecrease}></ChildEle>
             <Link href="/author?id=1" as='/author/1'><button>{props.name}</button></Link>
+            <a href={publicRuntimeConfig.oAuthUrl}>登录</a>
         </>
     );
 }

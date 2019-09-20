@@ -2,7 +2,7 @@ import App, {Container} from 'next/app';
 import {Provider} from 'react-redux'
 import routeEvent from '../lib/routeEvent';
 import {Router} from 'next/router';
-import showInfoHoc from '../lib/hoc';
+import uniqueStore from '../lib/uniqueStore';
 
 // import 'antd/dist/antd.css';
 import './index.css'
@@ -49,4 +49,4 @@ class MyApp extends App {
     }
 }
 
-export default showInfoHoc(MyApp);
+export default uniqueStore(MyApp);
