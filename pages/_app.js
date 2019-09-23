@@ -3,9 +3,9 @@ import {Provider} from 'react-redux'
 import routeEvent from '../lib/routeEvent';
 import {Router} from 'next/router';
 import uniqueStore from '../lib/uniqueStore';
+import Layout from '../components/layout';
 
 // import 'antd/dist/antd.css';
-import './index.css'
 
 function makeEvent(type){
     return (...args) => {
@@ -40,9 +40,9 @@ class MyApp extends App {
         return (
             <Container>
                 <Provider store={store}>
-                    <div className="Header">header</div>
-                    <Component {...pageProps}></Component>
-                    <div className="Footer">footer</div>
+                    <Layout>
+                        <Component {...pageProps}></Component>
+                    </Layout>
                 </Provider>
             </Container>
         )

@@ -1,7 +1,7 @@
 const axios = require('axios');
 const clientConfig = require('../lib/clientConfig');
 
-const {accessTokenUrl, clientID, clientSecret} = clientConfig.github;
+const {accessTokenUrl, userInfo, clientID, clientSecret} = clientConfig.github;
 
 module.exports = (server) => {
     server.use(async (ctx, next) => {
@@ -30,14 +30,35 @@ module.exports = (server) => {
             });
 
             if(result.status === 200 && result.data && !(result.data.error)){
-                console.log(result.data);
+                const {access_token, token_type} = result.data;
                 ctx.session.githubAuth = result.data;
+                const userRes = await axios({
+                    method: 'GET',
+                    url: userInfo,
+                    headers: {
+                        Authorization: `${token_type} ${access_token}`
+                    }
+                }); 
+                ctx.session.userInfo = userRes.data;
                 ctx.redirect('/');
             }else{
                 console.log(result.message);
                 ctx.body = result.message;
             }
 
+        }else{
+            await next();
+        }
+    });
+
+
+    // 退出
+    server.use(async (ctx, next) => {
+        
+        if(ctx.path === '/logout' && ctx.method === 'POST'){
+            console.log('用户退出');
+            ctx.session = null;
+            ctx.body = '退出成功'
         }else{
             await next();
         }

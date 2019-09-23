@@ -25,6 +25,7 @@ app.prepare().then(() => {
 
     server.use(session(SESSION_CONFIG, server));
 
+    // 授权中间件
     auth(server);
 
     // 使用路由中间件
@@ -33,7 +34,7 @@ app.prepare().then(() => {
 
     // 默认中间件
     server.use(async(ctx, next) => {
-        // console.log('session is ', ctx.session);
+        ctx.req.session = ctx.session;
         await handle(ctx.req, ctx.res);
         ctx.respond = false;
     });

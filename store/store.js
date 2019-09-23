@@ -1,32 +1,45 @@
 import {createStore, combineReducers, applyMiddleware} from 'redux';
 import ReduxThunk from 'redux-thunk';
 import {composeWithDevTools} from 'redux-devtools-extension';
+import axios from 'axios';
 
-const initialState = {
-    count: 0
-};
+const LOGOUT = 'LOGOUT'
 
-function counterReducer(state = initialState, action){
+const userInitialState = {};
+
+function userReducer(state = userInitialState, action){
     switch(action.type){
-        case 'INCREASE':
-            return {
-                count: state.count + 1
-            };
-        case 'DECREASE':
-            return {
-                count: state.count - 1
-            };
+        case LOGOUT:
+            return {}
         default:
             return state;
     }
 }
 
 const AllReducer = combineReducers({
-    counter: counterReducer
+    user: userReducer
 });
 
 const AllState = {
-    counter: initialState
+    user: userInitialState
+}
+
+
+export function logout(){
+    return dispatch => {
+        axios.post('/logout').then(res => {
+            console.log(res);
+            if(res.status === 200){
+                dispatch({
+                    type: LOGOUT
+                });
+            }else{
+                console.log('logout failed', res);
+            }
+        }).catch(e => {
+            console.log('logout post failed', e);
+        });
+    }
 }
 
 export default function initialStore(state){
