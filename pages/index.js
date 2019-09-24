@@ -37,6 +37,7 @@ Index.getInitialProps = async ({ctx, store}) => {
     }
     const userRepos = await api.request({url: '/user/repos'}, ctx.req, ctx.res);
     const userStarred = await api.request({url: '/user/starred'}, ctx.req, ctx.res);
+    
     return {
         repos: userRepos.data,
         starred: userStarred.data
