@@ -6,6 +6,8 @@ const Redis = require('ioredis');
 const sessionStore = require('./server/sessionStore');
 const auth = require('./server/auth');
 const routeConfig = require('./server/route');
+const api = require('./server/api');
+const koaBody = require('koa-body');
 
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({dev});
@@ -15,6 +17,8 @@ const redis = new Redis();
 app.prepare().then(() => {
     const server = new Koa();
     const router = new Router();
+
+    server.use(koaBody());
 
     // 为cookie加密
     server.keys = ['ff8789sb'];
@@ -27,6 +31,9 @@ app.prepare().then(() => {
 
     // 授权中间件
     auth(server);
+
+    // api中间件
+    api(server);
 
     // 使用路由中间件
     routeConfig(router);

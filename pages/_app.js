@@ -5,6 +5,7 @@ import {Router} from 'next/router';
 import uniqueStore from '../lib/uniqueStore';
 import Layout from '../components/layout';
 import PageLoading from '../components/pageLoading';
+import axios from 'axios';
 
 // import 'antd/dist/antd.css';
 

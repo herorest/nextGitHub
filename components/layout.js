@@ -45,7 +45,7 @@ const LayoutComp = ({children, user, userLogout, router}) => {
     const menu = (
         <Menu>
             <Menu.Item>
-                <a href=":;" onClick={handleLogout}>登出</a>
+                <a href="javascript:void(0);" onClick={handleLogout}>登出</a>
             </Menu.Item>
         </Menu>
     );
@@ -68,12 +68,12 @@ const LayoutComp = ({children, user, userLogout, router}) => {
                             {
                                 user && user.id ? 
                                 <Dropdown overlay={menu}>
-                                    <a href=":;" className="avatar">
+                                    <a href="javascript:void(0);" className="avatar">
                                         <Avatar size={40} src={user.avatar_url}></Avatar>
                                     </a>
                                 </Dropdown>
                                 :
-                                <a href=":;" onClick={handleGoOAuth}>
+                                <a href="javascript:void(0);" onClick={handleGoOAuth}>
                                     <Avatar size={40} icon="user"></Avatar>
                                 </a>
                             }

@@ -41,7 +41,6 @@ module.exports = (server) => {
                 }); 
                 ctx.session.userInfo = userRes.data;
                 if(ctx.session && ctx.session.urlBeforeOAuth){
-                    console.log('---', ctx.session.urlBeforeOAuth);
                     ctx.redirect(ctx.session.urlBeforeOAuth);
                     ctx.session.urlBeforeOAuth = '';
                 }else{
