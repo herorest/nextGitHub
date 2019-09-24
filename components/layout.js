@@ -4,15 +4,17 @@ import Container from './container';
 import getConfig from 'next/config';
 import {connect} from 'react-redux';
 import {logout} from '../store/store';
+import {withRouter} from 'next/router';
+import './layout.css'
+import axios from 'axios';
 
 const { Header, Content, Footer } = Layout;
 const {publicRuntimeConfig} = getConfig();
 
-import './layout.css'
 
 
 // 批量批注提示
-const LayoutComp = ({children, user, userLogout}) => {
+const LayoutComp = ({children, user, userLogout, router}) => {
     const [searchVal, setSearchVal] = useState('');
 
     const handleSearchChange = useCallback((e) => {
@@ -25,12 +27,25 @@ const LayoutComp = ({children, user, userLogout}) => {
 
     const handleLogout = useCallback((e) => {
         userLogout();
+    }, [userLogout]);
+
+    const handleGoOAuth = useCallback((e) => {
+        e.preventDefault();
+        axios.get(`/prepare-auth?url=${router.asPath}`).then(res => {
+            if(res.status === 200){
+                location.href = publicRuntimeConfig.oAuthUrl;
+            }else{
+                console.log('prepare auth failed', res);
+            }
+        }).catch(err => {
+            console.log('prepare auth ajax failed', err);
+        });
     }, []);
 
     const menu = (
         <Menu>
             <Menu.Item>
-                <a href="javascript:void(0);" onClick={handleLogout}>登出</a>
+                <a href=":;" onClick={handleLogout}>登出</a>
             </Menu.Item>
         </Menu>
     );
@@ -53,12 +68,12 @@ const LayoutComp = ({children, user, userLogout}) => {
                             {
                                 user && user.id ? 
                                 <Dropdown overlay={menu}>
-                                    <a href={publicRuntimeConfig.oAuthUrl} className="avatar">
+                                    <a href=":;" className="avatar">
                                         <Avatar size={40} src={user.avatar_url}></Avatar>
                                     </a>
                                 </Dropdown>
                                 :
-                                <a href={publicRuntimeConfig.oAuthUrl}>
+                                <a href=":;" onClick={handleGoOAuth}>
                                     <Avatar size={40} icon="user"></Avatar>
                                 </a>
                             }
@@ -120,4 +135,4 @@ export default connect(function mapStateToProps(state){
         dispatch,
         userLogout: () => dispatch(logout())
     }
-})(LayoutComp);
+})(withRouter(LayoutComp));

@@ -40,7 +40,15 @@ module.exports = (server) => {
                     }
                 }); 
                 ctx.session.userInfo = userRes.data;
-                ctx.redirect('/');
+                if(ctx.session && ctx.session.urlBeforeOAuth){
+                    console.log('---', ctx.session.urlBeforeOAuth);
+                    ctx.redirect(ctx.session.urlBeforeOAuth);
+                    ctx.session.urlBeforeOAuth = '';
+                }else{
+                    ctx.redirect('/');
+                }
+               
+
             }else{
                 console.log(result.message);
                 ctx.body = result.message;
@@ -54,11 +62,22 @@ module.exports = (server) => {
 
     // 退出
     server.use(async (ctx, next) => {
-        
         if(ctx.path === '/logout' && ctx.method === 'POST'){
             console.log('用户退出');
             ctx.session = null;
             ctx.body = '退出成功'
+        }else{
+            await next();
+        }
+    });
+
+    // 记录登录前的页面地址
+    server.use(async (ctx, next) => {
+        if(ctx.path === '/prepare-auth' && ctx.method === 'GET'){
+            const {url} = ctx.query;
+            ctx.session.urlBeforeOAuth = url;
+            console.log('记录成功', url);
+            ctx.body = '记录成功';
         }else{
             await next();
         }
