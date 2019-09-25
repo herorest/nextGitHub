@@ -5,3 +5,11 @@
     padding-top:10px;
     margin-right:20px;
 }
+
+.ant-layout{
+    background:#fff;
+}
+
+.ant-layout-content{
+    min-height: auto;
+}
