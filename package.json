@@ -10,7 +10,8 @@
     "next": "next",
     "dev2": "cross-env DEBUG=server:*,-not_this NODE_ENV=development node server.js",
     "start2": "cross-env NODE_ENV=production node server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "analyze": "cross-env BUNDLE_ANALYZE=browser next build"
   },
   "author": "",
   "license": "ISC",
@@ -40,5 +41,8 @@
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
     "styled-components": "^4.3.2"
+  },
+  "devDependencies": {
+    "@zeit/next-bundle-analyzer": "^0.1.2"
   }
 }

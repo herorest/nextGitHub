@@ -2,8 +2,17 @@ import {useEffect, useRef, useMemo, memo, useCallback} from 'react'
 import api from '../lib/requestApi';
 import {Button, Icon, Tabs} from 'antd';
 import {connect} from 'react-redux';
-import Repo from '../components/Repo';
+// import Repo from '../components/Repo';
 import Router, {withRouter} from 'next/router';
+import dynamic from 'next/dynamic';
+
+const Repo = dynamic(
+    () => import('../components/Repo'),
+    {
+        loading: () => <p>loading</p>
+    }
+);
+
 
 let cacheUserRepos, cacheUserStarred;
 const isServer = typeof window === 'undefined';

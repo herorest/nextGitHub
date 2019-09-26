@@ -87,7 +87,7 @@ const LayoutComp = ({children, user, userLogout, router}) => {
                 </Container>
             </Content>
             <Footer style={{ textAlign: 'center' }}>©2018 Created by SJ</Footer>
-            <style jsx global>
+            <style jsx>
                 {`
                     .header-inner{
                         display:flex;
